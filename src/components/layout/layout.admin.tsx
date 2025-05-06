@@ -59,22 +59,22 @@ const LayoutAdmin = () => {
             children: [
                 {
                     label: <Link to="/manage-user/roles">Khóa học</Link>,
-                    key: "/manage-user/roles",
+                    key: "/manage-class/roles",
                     icon: <ExceptionOutlined />,
                 },
                 {
                     label: <Link to="/manage-user/roles">Chuyên ngành</Link>,
-                    key: "/manage-user/roles",
+                    key: "/manage-class/roles",
                     icon: <ExceptionOutlined />,
                 },
                 {
                     label: <Link to="/manage-user/users">Kỳ học</Link>,
-                    key: "/manage-user/users",
+                    key: "/manage-class/users",
                     icon: <ExceptionOutlined />,
                 },
                 {
                     label: <Link to="/manage-user/users">Lớp học</Link>,
-                    key: "/manage-user/users",
+                    key: "/manage-class/users",
                     icon: <ExceptionOutlined />,
                 },
 

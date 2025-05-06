@@ -30,3 +30,65 @@ export const callForgotPassword = (data: IChangePassword) => {
     ...data,
   });
 };
+
+
+/**
+ * Module User API
+ */
+
+export const getUsersAPI = (query: string) => {
+  const urlBackend = `/api/v1/users?${query}`;
+  return axios.get<IBackendRes<IModelPaginate<IUserTable>>>(urlBackend);
+};
+
+export const createUserAPI = (data: any) => {
+  const urlBackend = "/api/v1/users";
+  return axios.post<IBackendRes<IUserTable>>(urlBackend, { ...data });
+};
+export const updateUserAPI = (id: number, data: any) => {
+  const urlBackend = `/api/v1/users/${id}`;
+  return axios.patch<IBackendRes<IUserTable>>(urlBackend, { ...data });
+};
+
+export const detailUserAPI = (id: number) => {
+  const urlBackend = `/api/v1/users/${id}`;
+  return axios.get<IBackendRes<IUserTable>>(urlBackend);
+};
+
+export const deleteUserAPI = (id: number) => {
+  const urlBackend = `/api/v1/users/${id}`;
+  return axios.delete<IBackendRes<IUserTable>>(urlBackend);
+};
+
+export const callBulkCreateUser = (user: IExcelData[]) => {
+  return axios.post<IBackendRes<IExcelData[]>>(
+    "/api/v1/users/bulk-create",
+    user
+  );
+};
+
+
+/**
+ *Module Roles API
+ *
+ */
+export const getRolesAPI = (query: string) => {
+  const urlBackend = `/api/v1/roles?${query}`;
+  return axios.get<IBackendRes<IModelPaginate<IRole>>>(urlBackend);
+};
+
+export const createRoleAPI = (data: any) => {
+  const urlBackend = "/api/v1/roles";
+  return axios.post<IBackendRes<IRole>>(urlBackend, { ...data });
+};
+
+export const updateRolesAPI = (data: any) => {
+  const urlBackend = "/api/v1/roles";
+  return axios.patch<IBackendRes<IRole>>(urlBackend, { ...data });
+};
+
+export const detailRolesAPI = (id: number | string) => {
+  const urlBackend = `/api/v1/roles/${id}`;
+  return axios.get<IBackendRes<IRole>>(urlBackend);
+};
+

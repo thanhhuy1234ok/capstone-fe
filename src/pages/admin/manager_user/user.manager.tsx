@@ -1,9 +1,12 @@
-const ManagerUserPage = () =>{
+import TableUser from "@/components/admin/manager_user/users/table.users";
+
+const ManagerUserPage = () => {
     return (
-        <div>
-        <h1>Manager User Page</h1>
-        <p>This is the manager user page.</p>
-        </div>
+        <>
+            <h1>Manager User Page</h1>
+            <p>This is the manager user page.</p>
+            <TableUser />
+        </>
     )
 }
 

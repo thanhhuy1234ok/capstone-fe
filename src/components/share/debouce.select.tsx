@@ -60,6 +60,9 @@ export function DebounceSelect<
             options={options}
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
+            style={{
+                cursor: 'pointer',
+            }}
         />
     );
 }

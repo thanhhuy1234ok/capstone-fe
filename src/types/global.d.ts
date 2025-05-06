@@ -94,4 +94,11 @@ declare global {
     uploadTitle?: string;
     apiFunction: (data: ExcelData[]) => Promise<any>;
   }
+
+    interface IExcelData {
+      fullName: string;
+      email: string;
+      // phone: string;
+      password?: string;
+    }
 }
