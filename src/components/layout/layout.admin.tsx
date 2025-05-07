@@ -51,48 +51,47 @@ const LayoutAdmin = () => {
                 },
             ],
         },
-        
         {
             label: "Quản lý Chương trình Đào tạo",
-            key: "/manage-class",
+            key: "/manage-curriculum",
             icon: <ExceptionOutlined />,
             children: [
                 {
-                    label: <Link to="/manage-user/roles">Khóa học</Link>,
-                    key: "/manage-class/roles",
+                    label: <Link to="/manage-curriculum/course">Khóa học</Link>,
+                    key: "/manage-curriculum/course",
                     icon: <ExceptionOutlined />,
                 },
                 {
-                    label: <Link to="/manage-user/roles">Chuyên ngành</Link>,
-                    key: "/manage-class/roles",
+                    label: <Link to="/manage-curriculum/major">Chuyên ngành</Link>,
+                    key: "/manage-curriculum/major",
                     icon: <ExceptionOutlined />,
                 },
                 {
-                    label: <Link to="/manage-user/users">Kỳ học</Link>,
-                    key: "/manage-class/users",
+                    label: <Link to="/manage-curriculum/semester">Kỳ học</Link>,
+                    key: "/manage-curriculum/semester",
                     icon: <ExceptionOutlined />,
                 },
                 {
-                    label: <Link to="/manage-user/users">Lớp học</Link>,
-                    key: "/manage-class/users",
+                    label: <Link to="/manage-curriculum/curriculum">Lộ trình học chuyên nghành</Link>,
+                    key: "/manage-curriculum/curriculum",
+                    icon: <ExceptionOutlined />,
+                },
+                {
+                    label: <Link to="/manage-curriculum/subject">Môn học</Link>,
+                    key: "/manage-curriculum/subject",
                     icon: <ExceptionOutlined />,
                 },
 
             ],
         },
         {
-            label: "Quản lý Môn học và Lộ trình học",
+            label: "Quản lý Môn học và lớp học",
             key: "/manage-subject",
             icon: <ExceptionOutlined />,
             children: [
                 {
-                    label: <Link to="/manage-subject/roles">Lộ trình học chuyên nghành</Link>,
-                    key: "/manage-subject/roles",
-                    icon: <ExceptionOutlined />,
-                },
-                {
-                    label: <Link to="/manage-subject/users">Môn học</Link>,
-                    key: "/manage-subject/users",
+                    label: <Link to="/manage-subject/class">Lớp học</Link>,
+                    key: "/manage-curriculum/class",
                     icon: <ExceptionOutlined />,
                 },
                 {

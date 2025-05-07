@@ -1,4 +1,4 @@
-import { data } from 'react-router-dom';
+import { data } from "react-router-dom";
 import { avatar } from "@/assets/avatar/avatar.jpg";
 import { Boolean } from "./../../node_modules/sass/types/legacy/function.d";
 export {};
@@ -83,7 +83,6 @@ declare global {
     email: string;
   }
 
-  
   interface IDataImportProps {
     setOpenModalImport: (open: boolean) => void;
     openModalImport: boolean;
@@ -95,10 +94,33 @@ declare global {
     apiFunction: (data: ExcelData[]) => Promise<any>;
   }
 
-    interface IExcelData {
-      fullName: string;
-      email: string;
-      // phone: string;
-      password?: string;
+  interface IExcelData {
+    fullName: string;
+    email: string;
+    // phone: string;
+    password?: string;
+  }
+
+  interface IMajor {
+    id: number | string;
+    name?: string;
+    code: string;
+  }
+
+  interface ICourse {
+    id: number | string;
+    startYear?: number;
+    endYear?: number;
+  }
+
+    interface ISemester {
+      id?: number | string;
+      name?: string;
+      startDate: Date;
+      endDate: Date;
+      isMainSemester?: boolean;
+      order:number;
+      maxCredits?: number;
+      course?: ICourse;
     }
 }
