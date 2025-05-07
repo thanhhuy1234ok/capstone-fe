@@ -132,4 +132,68 @@ declare global {
       price: number;
       isElective:boolean;
     }
+
+    
+  interface ICampus {
+    id: number | string;
+    name: string;
+    location: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
+  }
+
+  interface ITotalCampus {
+    totalCampuses: number;
+    totalBuildings: number;
+    totalRooms: number;
+  }
+
+  interface ISummaryCampus {
+    campusId: number;
+    campusName: string;
+    totalBuildings: number;
+    totalRooms: number;
+    totalFloors: number;
+  }
+
+  interface IDetailCampus {
+    name: string;
+    buildings: IBuilding[];
+  }
+
+  interface IBuilding {
+    name: string;
+    floors: IFloor[];
+    roomsWithoutFloor: string[];
+  }
+  interface IFloor {
+    floor: number;
+    rooms: string[];
+  }
+  interface IBuildingData {
+    id?: number | string;
+    name?: string;
+    totalFloors: number;
+    hasFloors: boolean;
+    campusId: number | string;
+    campus: ICampus;
+  }
+  interface IFloorData {
+    id?: number | string;
+    name?: string;
+    floor: number;
+    hasRooms: boolean;
+    buildingId: number | string;
+  }
+
+    interface IRoom {
+      id?: number | string;
+      name?: string;
+      capacity?: number;
+      status?: string;
+      building?: IBuildingData;
+      assignments?: IAssignment[];
+      equipments?: IEquipment[];
+    }
 }

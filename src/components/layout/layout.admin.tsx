@@ -103,17 +103,17 @@ const LayoutAdmin = () => {
         },
         {
             label: "Quản lý Cơ sở & Phòng học",
-            key: "/manage-room",
+            key: "/manage-campus-room",
             icon: <ExceptionOutlined />,
             children: [
                 {
-                    label: <Link to="/manage-room/buildings">Cơ sở và Tòa nhà</Link>,
-                    key: "/manage-room/buildings",
+                    label: <Link to="/manage-campus-room/buildings">Cơ sở và Tòa nhà</Link>,
+                    key: "/manage-campus-room/buildings",
                     icon: <ExceptionOutlined />,
                 },
                 {
-                    label: <Link to="/manage-room/classrooms">Phòng học</Link>,
-                    key: "/manage-room/classrooms",
+                    label: <Link to="/manage-campus-room/classrooms">Phòng học</Link>,
+                    key: "/manage-campus-room/classrooms",
                     icon: <ExceptionOutlined />,
                 },
             ],

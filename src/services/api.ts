@@ -157,3 +157,81 @@ export const createSubjectAPI = (data: any) => {
   const urlBackend = "/api/v1/subject";
   return axios.post<IBackendRes<ISubject>>(urlBackend, { ...data });
 };
+
+
+
+
+/**
+ * Module Campus API
+ */
+export const getCampusAPI = (query: string) => {
+  const urlBackend = `/api/v1/campus?${query}`;
+  return axios.get<IBackendRes<IModelPaginate<ICampus>>>(urlBackend);
+}
+
+export const getAllTotalCampusAPI = () => {
+  const urlBackend = `/api/v1/campus/total-all-campus`;
+  return axios.get<IBackendRes<ITotalCampus>>(urlBackend);
+}
+
+export const summaryCampusDetailAPI = (campusId:number) => {
+  const urlBackend = `/api/v1/campus/summary?campusId=${campusId}`;
+  return axios.get<IBackendRes<ISummaryCampus>>(urlBackend);
+};
+
+export const createCampusAPI = (data: any) => {
+  const urlBackend = "/api/v1/campus";
+  return axios.post<IBackendRes<ICampus>>(urlBackend, { ...data });
+}
+
+export const detailCampusAPI = (id: number) => {
+  const urlBackend = `/api/v1/campus/campus-detail?campusId=${id}`;
+  return axios.get<IBackendRes<IDetailCampus>>(urlBackend);
+}
+
+export const createBuildingAPI = (data: any) => {
+  const urlBackend = "/api/v1/building";
+  return axios.post<IBackendRes<IBuildingData>>(urlBackend, { ...data });
+}
+
+export const getListBuildingByCampusAPI = (id: string) => {
+  const urlBackend = `/api/v1/building?campusID=${id}`;
+  return axios.get<IBackendRes<IModelPaginate<IBuildingData>>>(urlBackend);
+}
+
+
+/**
+ * Module Floor API
+ */
+export const getFloorAPI = (query: string) => {
+  const urlBackend = `/api/v1/floor?buildingId=${query}`;
+  return axios.get<IBackendRes<IModelPaginate<IFloorData>>>(urlBackend);
+}
+
+/**
+ * Module Room API
+ */
+
+export const getRoomAPI = (query: string) => {
+  const urlBackend = `/api/v1/room?${query}`;
+  return axios.get<IBackendRes<IModelPaginate<IRoom>>>(urlBackend);
+};
+export const createRoomAPI = (data: any) => {
+  const urlBackend = "/api/v1/room";
+  return axios.post<IBackendRes<IRoom>>(urlBackend, { ...data });
+};
+
+// export const createRoomAPIV1 = (data: any) => {
+//   const urlBackend = "/api/v1/room";
+//   return axios.post<IBackendRes<IRoom>>(urlBackend, { ...data });
+// }
+
+export const createRoomBulkFacilityAPI = (data: any) => {
+  const urlBackend = "/api/v1/room/bulk-room-facility";
+  return axios.post<IBackendRes<IRoom>>(urlBackend, { ...data });
+};
+
+export const getDetailRoomAPI = (id: number) => {
+  const urlBackend = `/api/v1/room/${id}`;
+  return axios.get<IBackendRes<IRoom>>(urlBackend);
+};

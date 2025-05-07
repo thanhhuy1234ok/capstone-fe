@@ -12,6 +12,9 @@ import ManagerSemesterPage from "@/pages/admin/manager_curriculum/semester.manag
 import ManagerClassPage from "@/pages/admin/manager_subject_class/class.manager";
 import ManagerCurriculumPage from "@/pages/admin/manager_curriculum/curriculum.manager";
 import ManagerSubjectPage from "@/pages/admin/manager_curriculum/subject.manager";
+import CampusPage from "@/pages/admin/manager_campus_room/manager.campus";
+import DetailCampusPage from "@/pages/admin/manager_campus_room/detail.campus";
+import ManagerRoomPage from "@/pages/admin/manager_campus_room/room.manager";
 
 const LayoutSelector = () => { 
     const { isAuthenticated, user } = useCurrentApp();
@@ -48,6 +51,15 @@ const LayoutSelector = () => {
                 path:'manager-subject-class',
                 children:[
                     { path: 'class', element: <ManagerClassPage /> },
+                ]
+            },
+
+            {
+                path:'manage-campus-room',
+                children:[
+                    { path: 'buildings', element: <CampusPage /> },
+                    { path: 'buildings/:id', element: <DetailCampusPage /> },
+                    { path: 'classrooms', element: <ManagerRoomPage/> },
                 ]
             }
         ],
