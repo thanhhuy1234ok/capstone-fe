@@ -157,3 +157,11 @@ export const createSubjectAPI = (data: any) => {
   const urlBackend = "/api/v1/subject";
   return axios.post<IBackendRes<ISubject>>(urlBackend, { ...data });
 };
+
+/** 
+ * Module Curriculum API
+*/
+export const getCurriculumAPI = () =>{
+  const urlBackend = `/api/v1/curriculum`;
+  return axios.get<IBackendRes<Curriculum[]>>(urlBackend);
+}

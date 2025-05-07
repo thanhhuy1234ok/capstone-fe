@@ -132,4 +132,47 @@ declare global {
       price: number;
       isElective:boolean;
     }
+
+
+    
+    // === Type definitions ===
+    
+    interface Subject {
+        code: string;
+        name: string;
+    }
+    
+    interface Semester {
+        name: string;
+    }
+    
+    interface CurriculumSubject {
+        subject: Subject;
+        semester: Semester;
+        isElective: boolean;
+        orderInSemester: number;
+    }
+    
+    interface Course {
+        startYear: number;
+        endYear: number;
+    }
+    
+    interface Major {
+        name: string;
+    }
+    
+    interface Curriculum {
+        id: number;
+        name: string;
+        major: Major;
+        course: Course;
+        subjects: CurriculumSubject[];
+    }
+    
+    // === Main component ===
+    
+    interface CurriculumTableProps {
+        curriculums: Curriculum[];
+    }
 }
