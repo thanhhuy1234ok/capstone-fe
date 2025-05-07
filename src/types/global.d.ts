@@ -123,4 +123,13 @@ declare global {
       maxCredits?: number;
       course?: ICourse;
     }
+
+    interface ISubject {
+      id?: number | string;
+      name?: string;
+      code: string;
+      credits: number;
+      price: number;
+      isElective:boolean;
+    }
 }

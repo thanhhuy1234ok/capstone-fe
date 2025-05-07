@@ -144,3 +144,16 @@ export const callUpdateSemester = (
     ...semester,
   });
 };
+
+/**
+ * Module Subject API
+ */
+export const getSubjectAPI = (query: string) => {
+  const urlBackend = `/api/v1/subject?${query}`;
+  return axios.get<IBackendRes<IModelPaginate<ISubject>>>(urlBackend);
+};
+
+export const createSubjectAPI = (data: any) => {
+  const urlBackend = "/api/v1/subject";
+  return axios.post<IBackendRes<ISubject>>(urlBackend, { ...data });
+};

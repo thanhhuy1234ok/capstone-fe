@@ -1,60 +1,47 @@
 import ButtonComponents from "@/components/share/button";
 import DataTable from "@/components/share/data.table";
-import { getCoursesAPI, getSemesterAPI } from "@/services/api";
+import { getSubjectAPI } from "@/services/api";
 import { CloudUploadOutlined, DeleteOutlined, EditOutlined, ExportOutlined, PlusOutlined } from "@ant-design/icons";
 import { ActionType, ProColumns } from "@ant-design/pro-components";
-import { Badge, Popconfirm, Space, Tag } from "antd";
+import { Popconfirm, Space, Tag, } from "antd";
+
 import queryString from "query-string";
-import { useEffect, useRef, useState } from "react";
-import ModalSemester from "./model.semester";
+import { useRef, useState } from "react";
+import ModalSubject from "./model.subject";
+import FormatUtils from "@/utils/format.time";
 
 
-const TableSemester = () => {
+const TableSubject = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [openModalImport, setOpenModalImport] = useState(false);
-    const [dataUpdate, setDataUpdate] = useState<ISemester | null>(null);
-    const [courseOptions, setCourseOptions] = useState<ICourse[]>([]);
+    const [dataUpdate, setDataUpdate] = useState<ISubject | null>(null);
+    const [isDeleteCohort, setIsDeleteCohort] = useState<boolean>(false);
     const [meta, setMeta] = useState({
         current: 1,
         pageSize: 5,
         pages: 0,
         total: 0
     });
-    const [currentDataTable, setCurrentDataTable] = useState<ISemester[]>([]);
+    const [currentDataTable, setCurrentDataTable] = useState<ISubject[]>([]);
 
     const tableRef = useRef<ActionType>();
 
-    const reloadTable = async () => {
-        await tableRef?.current?.reload();
+    const handleDeleteRole = async (id: number) => {
+        // setIsDeleteCohort(true)
+        // const res = await deleteUserAPI(id);
+        // if (res && res.data) {
+        //     message.success('Xóa user thành công');
+        //     reloadTable();
+        // } else {
+        //     notification.error({
+        //         message: 'Đã có lỗi xảy ra',
+        //         description: res.message
+        //     })
+        // }
+        // setIsDeleteCohort(false)
     }
 
-    useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                const res = await getCoursesAPI(`current=1&pageSize=100`)
-
-                const uniqueCourses = res.data?.result || [];
-
-                // Lọc trùng niên khóa (nếu cần)
-                const uniqueSet = new Set();
-                const filtered = uniqueCourses.filter(course => {
-                    const key = `${course.startYear}-${course.endYear}`;
-                    if (uniqueSet.has(key)) return false;
-                    uniqueSet.add(key);
-                    return true;
-                });
-
-                setCourseOptions(filtered);
-            } catch (error) {
-                console.error('Lỗi khi lấy khóa học:', error);
-            }
-        };
-
-        fetchCourses();
-    }, []);
-
-
-    const columns: ProColumns<ISemester>[] = [
+    const columns: ProColumns<ISubject>[] = [
         {
             title: 'Id',
             dataIndex: 'id',
@@ -70,70 +57,86 @@ const TableSemester = () => {
             hideInSearch: true,
         },
         {
-            title: 'Tên học kỳ',
-            dataIndex: 'name',
-        },
-        {
-            title: 'Thời gian bắt đầu',
-            dataIndex: 'startDate',
-        },
-
-        {
-            title: 'Thời gian kết thúc',
-            dataIndex: 'endDate',
-        },
-        {
-            title: 'Loại kỳ học',
-            dataIndex: 'isMainSemester',
-            render: (text, record) => (
-                record.isMainSemester
-                    ? <Tag color="success">Kỳ chính</Tag>
-                    : <Tag color="warning">Kỳ hè</Tag>
-            ),
-            valueEnum: {
-                true: { text: 'Kỳ chính', status: 'Success' },
-                false: { text: 'Kỳ hè', status: 'Warning' },
-            },
+            title: 'Mã môn học',
+            dataIndex: 'code',
             // sorter: true,
         },
         {
-            title: 'Khóa học',
-            dataIndex: ['course'],
-            renderText: (text,record) => 
-                (
-                <div>{record.course?.startYear} - {record.course?.endYear}</div>
-                ),  
-            filters: courseOptions.map(c => ({
-                text: `${c.startYear} - ${c.endYear}`,
-                value: c.id, // dùng id để lọc
-            })),
+            title: 'Tên môn học',
+            dataIndex: 'name',
+            key: 'name',
+            sorter: true,
         },
         {
+            title: 'Loại môn',
+            dataIndex: 'isElective',
+            render: (_dom, entity, _index, _action, _schema) => (
+                <Tag color={entity ? 'blue' : 'green'}>
+                    {entity ? 'Tự chọn' : 'Bắt buộc'}
+                </Tag>
+            ),
+            hideInSearch: true
+        },
+        {
+            title: 'Số tín chỉ',
+            dataIndex: 'credits',
+            // sorter: true,
+            hideInSearch: true
+        },
+        {
+            title: 'Giá tiền môn học',
+            dataIndex: 'price',
+            // sorter: true,
+            render: (text, record, index, action) => {
+                return (
+                    <span>
+                        {record?.price
+                            ? FormatUtils.formatCurrencyWithVND(record.price)
+                            : "không có"}
+                    </span>
+                )
+            },
+        
+            hideInSearch: true
+        },
 
+        {
             title: 'Actions',
             hideInSearch: true,
             width: 50,
             render: (_value, entity, _index, _action) => (
                 <Space>
+                    {/* <Access
+                        permission={ALL_PERMISSIONS.ROLES.UPDATE}
+                        hideChildren
+                    >
+                        
+                    </Access> */}
                     <EditOutlined
                         style={{
                             fontSize: 20,
                             color: '#ffa500',
                         }}
                         type=""
-                        onClick={() => {
-                            setOpenModal(true);
-                            setDataUpdate(entity);
+                        onClick={async () => {
+                            setDataUpdate(entity)
+                            setOpenModal(true)
                         }}
                     />
-
+                    {/* <Access
+                        permission={ALL_PERMISSIONS.ROLES.DELETE}
+                        hideChildren
+                    >
+                        
+                    </Access> */}
                     <Popconfirm
                         placement="leftTop"
-                        title={"Xác nhận xóa semester"}
-                        description={"Bạn có chắc chắn muốn xóa user này ?"}
-                        // onConfirm={() => handleDeleteUser(entity.id)}
+                        title={"Xác nhận xóa role"}
+                        description={"Bạn có chắc chắn muốn xóa role này ?"}
+                        // onConfirm={() => handleDeleteRole(+entity.id)}
                         okText="Xác nhận"
                         cancelText="Hủy"
+                        okButtonProps={{ loading: isDeleteCohort }}
                     >
                         <span style={{ cursor: "pointer", margin: "0 10px" }}>
                             <DeleteOutlined
@@ -153,9 +156,7 @@ const TableSemester = () => {
     const buildQuery = (params: any, sort: any, filter: any) => {
         const clone = { ...params };
         if (clone.name) clone.name = `${clone.name}`;
-        if (filter.course?.[0]) {
-            clone.course = filter.course[0]; // ← courseId chọn từ filter
-        }
+
         let temp = queryString.stringify(clone);
 
         let sortBy = "";
@@ -213,19 +214,20 @@ const TableSemester = () => {
     }
 
 
-
-
+    const reloadTable = () => {
+        tableRef.current?.reload();
+    }
     return (
         <>
-            <DataTable<ISemester>
+            <DataTable<ISubject>
                 actionRef={tableRef}
-                headerTitle="Danh sách kỳ học"
+                headerTitle="Danh sách Môn học"
                 rowKey="id"
                 columns={columns}
                 dataSource={currentDataTable}
                 request={async (params, sort, filter): Promise<any> => {
                     const query = buildQuery(params, sort, filter);
-                    const res = await getSemesterAPI(query);
+                    const res = await getSubjectAPI(query);
                     if (res.data) {
                         setMeta(res.data.meta);
                         setCurrentDataTable(res.data?.result ?? [])
@@ -253,10 +255,14 @@ const TableSemester = () => {
                         <RenderHeaderTable />
                     );
                 }}
-                search={false}
+                search={{
+                    labelWidth: 'auto',
+                    defaultCollapsed: false,
+                    span: 8,
+                }}
             />
 
-            <ModalSemester
+            <ModalSubject
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 refreshTable={reloadTable}
@@ -267,4 +273,4 @@ const TableSemester = () => {
     )
 }
 
-export default TableSemester
+export default TableSubject
