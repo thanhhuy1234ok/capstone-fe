@@ -15,6 +15,10 @@ import ManagerSubjectPage from "@/pages/admin/manager_curriculum/subject.manager
 import CampusPage from "@/pages/admin/manager_campus_room/manager.campus";
 import DetailCampusPage from "@/pages/admin/manager_campus_room/detail.campus";
 import ManagerRoomPage from "@/pages/admin/manager_campus_room/room.manager";
+import ManagerFacilityPage from "@/pages/admin/manager_facility/facility.manager";
+import ManagerMaintenanceHistoryPage from "@/pages/admin/manager_facility/maintenance.history.manager";
+import ManagerFacilityHistoryPage from "@/pages/admin/manager_facility/facility.history.manager";
+import SupplierManagerPage from "@/pages/admin/manager_facility/supplier.manager";
 
 const LayoutSelector = () => { 
     const { isAuthenticated, user } = useCurrentApp();
@@ -61,7 +65,20 @@ const LayoutSelector = () => {
                     { path: 'buildings/:id', element: <DetailCampusPage /> },
                     { path: 'classrooms', element: <ManagerRoomPage/> },
                 ]
-            }
+            },
+
+            {
+                path: 'manage-facility',
+                children: [
+                    { path: 'facility', element: <ManagerFacilityPage /> },
+                    { path: 'facility-items', element: (<>items facility</>)},
+                    { path: 'device_loans', element: (<>device_loans</>) },
+                    { path: 'supplier', element: <SupplierManagerPage/> },
+                    { path: 'facility-history', element: <ManagerFacilityHistoryPage /> },
+                    { path: 'maintenance-history', element: <ManagerMaintenanceHistoryPage /> },
+                    { path:'facility-status-logs', element: (<>facility-status-logs</>) },
+                ]
+            },
         ],
     }
 

@@ -235,3 +235,17 @@ export const getDetailRoomAPI = (id: number) => {
   const urlBackend = `/api/v1/room/${id}`;
   return axios.get<IBackendRes<IRoom>>(urlBackend);
 };
+
+/**
+ * Module Supplier API
+ */
+
+export const getSupplierAPI = (query: string) => {
+  const urlBackend = `/api/v1/supplier?${query}`;
+  return axios.get<IBackendRes<IModelPaginate<ISupplier>>>(urlBackend);
+}
+
+export const createSupplierAPI = (data: any) => {
+  const urlBackend = "/api/v1/supplier";
+  return axios.post<IBackendRes<ISupplier>>(urlBackend, { ...data });
+}

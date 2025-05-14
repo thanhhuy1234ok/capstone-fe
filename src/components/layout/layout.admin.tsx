@@ -124,20 +124,41 @@ const LayoutAdmin = () => {
             icon: <ExceptionOutlined />,
             children: [
                 {
-                    label: <Link to="/manage-facility/users">Thiết bị</Link>,
-                    key: "/manage-facility/users",
+                    label: <Link to="/manage-facility/facility">Quản lý Thiết bị</Link>,
+                    key: "/manage-facility/facility",
                     icon: <ExceptionOutlined />,
                 },
                 {
-                    label: <Link to="/manage-facility/roles">Lịch sử bố trí thiết bị</Link>,
-                    key: "/manage-facility/roles",
+                    label: <Link to="/manage-facility/facility-items">Quản lý từng thiết bị cụ thể</Link>,
+                    key: "/manage-facility/facility-items",
                     icon: <ExceptionOutlined />,
                 },
                 {
-                    label: <Link to="/manage-facility/roles">Lịch sử bảo trì</Link>,
-                    key: "/manage-facility/roles",
+                    label: <Link to="/manage-facility/device_loans">Quản lý mượn/trả thiết bị</Link>,
+                    key: "/manage-facility/device_loans",
                     icon: <ExceptionOutlined />,
                 },
+                {
+                    label: <Link to="/manage-facility/supplier">Nhà cung cấp</Link>,
+                    key: "/manage-facility/supplier",
+                    icon: <ExceptionOutlined />,
+                },
+                {
+                    label: <Link to="/manage-facility/facility-history">Lịch sử bố trí thiết bị</Link>,
+                    key: "/manage-facility/facility-history",
+                    icon: <ExceptionOutlined />,
+                },
+                {
+                    label: <Link to="/manage-facility/maintenance-history">Lịch sử bảo trì</Link>,
+                    key: "/manage-facility/maintenance-history",
+                    icon: <ExceptionOutlined />,
+                },
+                {
+                    label: <Link to="/manage-facility/facility-status-logs">Lịch sử thay đổi trạng thái</Link>,
+                    key: "/manage-facility/facility-status-logs",
+                    icon: <ExceptionOutlined />,
+                },
+
             ],
 
         },

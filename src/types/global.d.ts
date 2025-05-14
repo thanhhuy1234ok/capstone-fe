@@ -196,4 +196,13 @@ declare global {
       assignments?: IAssignment[];
       equipments?: IEquipment[];
     }
+
+    interface ISupplier {
+      id?: number | string;
+      name?: string;
+      address?: string;
+      phone?: string;
+      email?: string;
+      note?: string;
+    }
 }
